@@ -1,5 +1,7 @@
 # Go 101 - Introduction to Go
+
 [< Course overview](./)
+
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
@@ -27,11 +29,12 @@
         - [Exercise 1: Binaries](#exercise-1-binaries)
         - [Exercise 2: Go env](#exercise-2-go-env)
         - [Exercise 3: Print something else](#exercise-3-print-something-else)
+    - [Further reading](#further-reading)
 
 <!-- markdown-toc end -->
 
 ## Introduction
-This course introduces the programming language Go. This first module mainly focuses on introducing Go and the `go` tool. This module also includes an installation guide.
+This course introduces the programming language Go.
 
 This module ends with a series of exercises: you will play with the `go` tool and write your first line of Go.
 
@@ -45,6 +48,8 @@ Have fun!
 Go, often refered to as *golang*, is a relatively young programming language that was created at Google. Go was announced in 2009 and saw it's first official release in 2012.
 
 This course will use both *Go* and *Golang* to refer to the *Go programming language*.
+
+This first module mainly focuses on introducing Go and the `go` tool. This module also includes an installation guide.
 
 ### Why Go?
 According to the creators of Go:
@@ -77,10 +82,10 @@ Most of the software created at DutchSec is written in Go, for example [Honeytra
 *Concurrency across programming languages. ([source](https://youtu.be/5bYO60-qYOI?t=3m6s))*
 
 ## Get Going
-Getting started with Go is really simple. The setup process has three main steps: installing Go, setting a few environment variables and adding go to `PATH`.
+Getting started with Go is really simple. The setup process has three main steps: installing Go, setting a few environment variables and adding go to your `PATH`.
 
 ### Install go
-Assuming that you do not currently have Go installed on your machine, start by [installing Go](https://golang.org/doc/install) as described below for your operating system.
+Assuming that Go is currently not installed on your machine, start by [installing Go](https://golang.org/doc/install) as described below for your operating system.
 
 #### MacOS
 MacOS users can download Go from the link provided above, however, Homebrew users can install Go by simply running `brew install go`.
@@ -114,20 +119,19 @@ If your Homebrew installed comes with a working `go env GOROOT` you should still
 
 ```bashrc
 export GOROOT=$(go env GOROOT)
-
 ```
 
 ### Set GOPATH
 [The `GOPATH` environment variable](https://github.com/golang/go/wiki/SettingGOPATH) specifies the location of your [Go workspace](https://www.callicoder.com/golang-installation-setup-gopath-workspace/#gopath-go-workspace-and-go-code-organization). It might be useful to change this if you want to, for example, use `~/dev/go/` as your Go workspace. If you do not set a `GOPATH` environment variable, Go will default to `~/go`.
 
-When setting `GOPATH` to a directory that doesn't exist yet, remember to create it.
+When setting `GOPATH` to a directory that doesn't exist yet, remember to create the directory.
 
 To see the current value for `GOROOT` run:
 ```bash
 go env GOROOT
 ```
 
-To permanently set `GOROOT`, again, add it to `~/.bashrc` (or similar).
+To permanently set `GOROOT`, add it to `~/.bashrc` (or similar).
 ```bash
 export GOROOT=/usr/local/opt/go/libexec
 ```
@@ -135,22 +139,22 @@ export GOROOT=/usr/local/opt/go/libexec
 ### Set GOBIN
 `GOBIN` can be used to specify where Go should store compiled programs (on succesfully running `go install`).
 
-By defauly, `GOBIN` is set to nothing and Go stores compiled files in `$GOPATH/bin`. If you want Go to put it's new binaries somewhere else, you can specify another directory by setting GOBIN.
+By default, `GOBIN` is set to nothing and Go stores compiled files in `$GOPATH/bin`. If you want Go to put it's new binaries somewhere else, you can specify another directory by setting `GOBIN`.
 
 ### Set up dirs
-This step isn't super required, but smart. Ensure that the following directories exist (create them if they don't):
+This step isn't a hard requirment, but recommended. Ensure that the following directories exist (create them if they don't):
 - Your `GOPATH` directory as set in `GOPATH`, or `~/go`.
 - `$GOPATH/bin`, 
 - `$GOPATH/pkg`, 
 - `$GOPATH/src`
 
 ### Set up PATH
-Finally, add Go to path adding this line to `~/.bashrc` or similar:
+Finally, add Go to your `PATH` by adding this line to `~/.bashrc` or similar:
 ```bash
 export PATH=$PATH:$GOROOT/bin
 ```
 
-Finally, to make freshly compiled programs instantly available to you, add `$GOPATH/bin` to path by adding this line to `~/.bashrc` or similar:
+Finally, to make freshly compiled programs instantly available to you, add `$GOPATH/bin` to `PATH` by adding this line to `~/.bashrc` or similar:
 ```bash
 export PATH=$PATH:$GOPATH/bin
 ```
@@ -187,22 +191,8 @@ you should place your code here."
   )
 ```
 
-If you added a line to this section of your `.spacemacs` and are unsure how to add another one, take a look at this example containing two lines:
-```elisp
-(defun dotspacemacs/user-config ()
-  "Configuration function for user code.
-This function is called at the very end of Spacemacs initialization after
-layers configuration.
-This is the place where most of your configurations should be done. Unless it is
-explicitly specified that a variable should be set before a package is loaded,
-you should place your code here."
-  (display-time-mode 1)
-  (setq gofmt-command "goimports")
-  )
-```
-
 ### Test run
-Verify everything is working as it should by following the instructions in the [tutorial from before](https://www.callicoder.com/golang-installation-setup-gopath-workspace/#testing-your-go-installation-with-the-hello-world-program).
+Verify everything is working as it should by following the testing instructions in the [tutorial from before](https://www.callicoder.com/golang-installation-setup-gopath-workspace/#testing-your-go-installation-with-the-hello-world-program).
 
 ## Test yourself
 
@@ -213,7 +203,17 @@ What does `GOPATH` do?
 Where does `go install` output binaries to?
 
 ### Exercise 2: Go env
-Find out how to print all Go environment variables using the `go` tool.
+Find out how to print all Go environment variables (such as `GOROOT`) using the `go` tool.
 
 ### Exercise 3: Print something else
-Using the test program from the [Test run](#test-run) chapter, create a new program called `learning`. This program should print `I'm learning!` instead of `Hello, World.` Create a binary in `$GOBIN`.
+Using the test program from the [Test run](#test-run) chapter, create a new program called `learning`. This program should print `I'm learning!` instead of `Hello, World.` Create a binary in `$GOBIN` with `go install`.
+
+## Further reading
+To learn more about programming in Go, have a look at these:
+
+| Topic           | note                                                       | url                                     |   |
+| ---             | ---                                                        | ---                                     |   |
+| Golang-book.com | [PDF](https://www.golang-book.com/public/pdf/gobook.0.pdf) | https://www.golang-book.com/books/intro |   |
+| A Tour of Go    |                                                            | https://tour.golang.org                 |   |
+
+[Next course module >](./102_intermediate_go.md)
