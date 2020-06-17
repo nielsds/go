@@ -108,7 +108,7 @@ To see the current value for `GOROOT` run:
 go env GOROOT
 ```
 
-Assuming a regular install, Go was installed in `/usr/local/go`. To set `GOROOT` to the afformentioned location, simply add the following line to your `~/.bashrc` (or similar file):
+Assuming a default install, Go was installed in `/usr/local/go`. To set `GOROOT` to the afformentioned location, simply add the following line to your `~/.bashrc` (or similar file):
 ```bash
 export GOROOT=/usr/local/go
 ```
@@ -126,14 +126,20 @@ export GOROOT=$(go env GOROOT)
 
 When setting `GOPATH` to a directory that doesn't exist yet, remember to create the directory.
 
-To see the current value for `GOROOT` run:
+To see the current value for `GOPATH` run:
 ```bash
-go env GOROOT
+go env GOPATH
 ```
 
-To permanently set `GOROOT`, add it to `~/.bashrc` (or similar).
+To permanently set `GOPATH`, add it to `~/.bashrc` (or similar).
 ```bash
-export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=~/go
+```
+
+If your Homebrew installation comes with a working `go env GOPATH` you should still set `GOPATH` in your `~/.bashrc` or similar. If `go env GOPATH` contains a value, it's easiet to set `GOPATH` to this value right away. In `~/.bashrc` or similar, simply add:
+
+```bashrc
+export GOPATH=$(go env GOPATH)
 ```
 
 ### Set GOBIN
@@ -162,7 +168,7 @@ export PATH=$PATH:$GOPATH/bin
 ### Preparing SpaceMacs
 SpaceMacs users can follow these [instructions](https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/go) to properly set up Go mode.
 
-To be safe, make sure to set `GOROOT`, `GOPATH`, `GOBIN`.
+> To be safe, make sure to set `GOROOT`, `GOPATH`, `GOBIN`.
 
 When upgrading from an older version of Go, it might be a good idea to update your SpaceMacs packages (this can be done from the SpaceMacs home buffer (`SPC b h`)).
 
